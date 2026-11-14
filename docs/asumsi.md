@@ -18,12 +18,12 @@ Format tiap entri:
 
 Salin setiap pertanyaan ambigu (nomor 1 sampai 7) ke sini dan jawab. Contoh:
 
-## A-01: batas waktu bentrok
-- Pertanyaan: 09:00-11:00 dan 11:00-13:00 pada aset yang sama bentrok atau tidak?
-- Keputusan: (isi)
-- Alasan: (isi)
-- Dampak ke kode: (isi)
-- Tes yang membuktikan: (isi)
+## A-01: batas waktu tidak bentrok
+- Pertanyaan: Apakah dua jadwal peminjaman pada aset yang sama dengan waktu berbatasan langsung (misalnya 09:00–11:00 dan 11:00–13:00) dianggap bentrok?
+- Keputusan: Tidak bentrok. Setiap jadwal dimodelkan menggunakan interval setengah terbuka `[mulai, selesai)`, sehingga peminjaman baru dapat langsung dimulai tepat pada jam berakhirnya peminjaman sebelumnya.
+- Alasan: Tidak ada irisan waktu penggunaan fisik aset di antara kedua sesi tersebut, sekaligus menghindari keharusan menyisipkan jeda waktu kosong yang tidak perlu antar peminjam.
+- Dampak ke kode: Metode `JadwalPeminjaman.bentrok` memeriksa tumpang tindih dengan kondisi `baru.getMulai().isBefore(lama.getSelesai()) && baru.getSelesai().isAfter(lama.getMulai())`. Kondisi ini bernilai `false` ketika waktu mulai dan selesai bernilai sama.
+- Tes yang membuktikan: `BatasBentrokTest.java` di dalam direktori `core/src/test/java/id/ac/upb/asetpinjam/mahasiswa/`.
 
 ## A-02: denda progresif
 - Pertanyaan: Bagaimana rumus progresif jika sudah sampai minggu ke-5 atau lebih?

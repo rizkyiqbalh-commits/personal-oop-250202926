@@ -13,6 +13,9 @@ public class AlatLab extends Aset {
         if (laboratorium == null || laboratorium.isBlank()) {
             throw new IllegalArgumentException("Laboratorium tidak boleh kosong");
         }
+        if (tingkatRisiko == null) {
+            throw new IllegalArgumentException("Tingkat risiko tidak boleh null");
+        }
         this.laboratorium = laboratorium;
         this.tingkatRisiko = tingkatRisiko;
     }
